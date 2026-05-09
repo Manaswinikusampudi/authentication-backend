@@ -1,9 +1,14 @@
 package com.example.backend.entity;
 
-import jakarta.persistence.*;
-import lombok.Data;
-
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "USERS")
@@ -18,6 +23,7 @@ public class User {
     private String username;
 
     @Column(name = "DOB")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 
     @Column(name = "PASSWORD")

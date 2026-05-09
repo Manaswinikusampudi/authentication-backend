@@ -26,6 +26,16 @@ public class UserController {
             return "User already exists";
         }
 
+        String password = user.getPassword();
+
+        String regex =
+                "^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,12}$";
+
+        if(!password.matches(regex)) {
+
+            return "Password does not meet requirements";
+        }
+
         repo.save(user);
 
         return "Registration Successful";
@@ -60,6 +70,14 @@ public class UserController {
 
         if(!existingUser.getPassword().equals(request.getOldPassword())) {
             return "Old password is incorrect";
+        }
+
+        String regex =
+                "^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,12}$";
+
+        if(!request.getNewPassword().matches(regex)) {
+
+            return "New password does not meet requirements";
         }
 
         if(!request.getNewPassword().equals(request.getConfirmPassword())) {
