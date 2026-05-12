@@ -1,15 +1,14 @@
 package com.example.backend.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.backend.dto.ChangePasswordRequest;
 import com.example.backend.dto.ForgotPasswordRequest;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -89,6 +88,15 @@ public class UserController {
         repo.save(existingUser);
 
         return "Password changed successfully";
+    }
+
+    // GET USER QUESTIONS
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable("id") String id) {
+
+        Optional<User> user = repo.findById(id);
+
+        return user.orElse(null);
     }
 
     // FORGOT PASSWORD API
