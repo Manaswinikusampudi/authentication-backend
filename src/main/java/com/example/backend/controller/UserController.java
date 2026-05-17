@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.dto.ChangeCredentialsRequest;
 import com.example.backend.dto.ChangePasswordRequest;
 import com.example.backend.dto.ForgotPasswordRequest;
 import com.example.backend.entity.User;
@@ -22,14 +23,16 @@ public class UserController {
 
     // REGISTER API
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
+    public String register(
+            @RequestBody User user) {
 
         return service.register(user);
     }
 
     // LOGIN API
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public String login(
+            @RequestBody User user) {
 
         return service.login(user);
     }
@@ -42,9 +45,10 @@ public class UserController {
         return service.changePassword(request);
     }
 
-    // GET USER QUESTIONS
+    // GET USER QUESTIONS API
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable("id") String id) {
+    public User getUser(
+            @PathVariable("id") String id) {
 
         return service.getUser(id);
     }
@@ -55,5 +59,13 @@ public class UserController {
             @RequestBody ForgotPasswordRequest request) {
 
         return service.forgotPassword(request);
+    }
+
+    // CHANGE USER CREDENTIALS API
+    @PostMapping("/changeCredentials")
+    public String changeCredentials(
+            @RequestBody ChangeCredentialsRequest request) {
+
+        return service.changeCredentials(request);
     }
 }
